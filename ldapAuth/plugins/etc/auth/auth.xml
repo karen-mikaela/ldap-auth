@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet type="text/xsl" href=""?>
+
+<plugin>
+    <name>auth</name>
+    <creationDate>2014-12-24</creationDate>
+    <author>Karen Mikaela</author>
+    <authorEmail>karen.mikaela@gmailcom</authorEmail>
+    <authorUrl>karen-mikaela.github.io</authorUrl>
+    <license>GPL</license>
+    <description>Auth using ldap lib</description>
+    <version>1.0.0</version>
+    <oxversion>3.1.0</oxversion>
+    <extends>authentication</extends>
+
+    <install>
+
+        <syscheck>
+            <!-- optional dbms compatibility declarations -->
+            <!-- if you know your components won't work with a dbms -->
+            <!-- set supported to 0 -->
+            <!--dbms>
+                <name>mysql</name>
+                <supported>1</supported>
+            </dbms>
+            <dbms>
+                <name>pgsql</name>
+                <supported>1</supported>
+            </dbms-->
+
+            <!-- optional php setting requirement declarations -->
+            <!--php>
+                <setting name='phpini1'>phpval1</setting>
+                <setting name='phpini2'>phpval2</setting>
+            </php-->
+
+            <!-- optional plugin group dependency declaration -->
+            <!-- if this group depends on another group (not plugin!) -->
+            <!-- remember to set the group installation order in the plugin definition -->
+            <!--depends>
+                <plugin version="0.0.1" enabled="0">anotherPluginGroup</plugin>
+            </depends-->
+        </syscheck>
+
+        <files>
+            <file path="{GROUPPATH}/">processPreferences.php</file>
+            <file path="{GROUPPATH}/">processSettings.php</file>
+            <file path="{MODULEPATH}authentication/auth/">authComponent.class.php</file>
+            <file path="{MODULEPATH}authentication/auth/">authComponent.delivery.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/">adLDAP.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/">CHANGELOG.txt</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/">LICENCE.txt</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/">README.md</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/classes/">adLDAPComputers.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/classes/">adLDAPContacts.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/classes/">adLDAPExchange.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/classes/">adLDAPFolders.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/classes/">adLDAPGroups.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/classes/">adLDAPUsers.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/classes/">adLDAPUtils.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/collections/">adLDAPCollection.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/collections/">adLDAPComputerCollection.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/collections/">adLDAPContactCollection.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/collections/">adLDAPGroupCollection.php</file>
+            <file path="{MODULEPATH}authentication/auth/lib/adLDAP/src/collections/">adLDAPUserCollection.php</file>
+            <!--file path="{MODULEPATH}authentication/auth/_lang">en.mo</file-->
+        </files>
+
+
+
+        <!-- optional configuration settings and preferences -->
+        <configuration>
+            <!-- only administrator has permissions to change settings in config file -->
+
+            <!-- settings are written to a group section [auth] -->
+            <setting key="ldapEnable" type="checkbox" label="ldapEnable" required="1" size="32" visible="1">true</setting>
+            <setting key="ldapRecursiveGroups" type="checkbox" label="ldapRecursiveGroups" required="0" size="32" visible="1">true</setting>
+            <setting key="ldapRealPrimarygroup" type="checkbox" label="ldapRealPrimarygroup" required="0" size="32" visible="1">true</setting>
+            <setting key="ldapSSO" type="checkbox" label="ldapSSO" required="0" size="32" visible="1">false</setting>
+            <setting key="ldapUseSSL" type="checkbox" label="ldapUseSSL" required="0" size="32" visible="1">false</setting>
+            <setting key="ldapUseTLS" type="checkbox" label="ldapUseTLS" required="0" size="32" visible="1">false</setting>
+            <setting key="ldapUserInGroup" type="text" label="ldapUserInGroup" required="1" size="32" visible="1">Revive</setting>
+            <setting key="ldapAdPort" type="text" label="ldapAdPort" required="1" size="32" visible="1">389</setting>
+            <setting key="ldapPrefix" type="text" label="ldapPrefix" required="1" size="32" visible="1"></setting>
+            <setting key="ldapAccountSufix" type="text" label="ldapAccountSufix" required="0" size="32" visible="1"></setting>
+            <setting key="ldapBaseDn" type="text" label="ldapBaseDn" required="1" size="32" visible="1"></setting>
+            <setting key="ldapDomainController" type="text" label="ldapDomainController" required="1" size="32" visible="1"></setting>
+            <setting key="ldapAdminUsername" type="text" label="ldapAdminUsername" required="0" size="32" visible="1"></setting>
+            <setting key="ldapAdminPassword" type="text" label="ldapAdminPassword" required="0" size="32" visible="1"></setting>
+            <setting key="ldapDefaultLanguage" type="text" label="ldapDefaultLanguage" required="1" size="32" visible="1">pt_BR</setting>
+            <setting key="ldapDefaultAccountID" type="text" label="ldapDefaultAccountID" required="1" size="32" visible="1">2</setting>
+
+
+            <!-- preferences have role-based permissions-->
+            <!-- preferences are prefixed in the preference table with the group name e.g. auth_preference_Admin -->
+            <!-- type, label, size and visible govern the display of the preference for editing -->
+            <!-- required=1 for mandatory preferences ; required=0 for optional preferences -->
+            <!--preference name="preference_Admin"      permission="ADMIN"      type="text" label="Admin Colour"     required="1" size="7" visible="1">preference_Admin default value</preference>
+            <preference name="preference_Manager"    permission="MANAGER"    type="text" label="Manager Colour"   required="0" size="7" visible="1">preference_Manager default value</preference>
+            <preference name="preference_Advertiser" permission="ADVERTISER" type="text" label="Advertiser Colour" required="0" size="7" visible="1">preference_Advertiser default value</preference>
+            <preference name="preference_Trafficker" permission="TRAFFICKER" type="text" label="Trafficker Colour" required="0" size="7" visible="1">preference_Trafficker default value</preference-->
+        </configuration>
+
+        <!-- details of individual components in this group -->
+        <components>
+           <!--component-->
+                <!--name>{COMPONENT}</name-->
+                <!-- optional language file -->
+                <!--translations>{MODULEPATH}authentication/auth/_lang/</translations-->
+                <!-- optional hooks -->
+                <!--hook>{HOOK}</hook-->
+           <!--/component-->
+        </components>
+
+        <!-- optional database schema info -->
+
+
+        <!-- optional custom event scripts -->
+        <prescript>prescript_install_auth.php</prescript>
+        <postscript>postscript_install_auth.php</postscript>
+
+    </install>
+
+</plugin>
