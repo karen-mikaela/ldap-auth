@@ -13,11 +13,12 @@ Compatible with revive version 3.0.5 >=.
 ## HOW TO INSTALL A PLUGIN IN REVIVE ADSERVER
 The first step is to pack our plugin, just follow the steps below.
 Clone this repo and zip the contents
-´´´shell
+
+```Shell
 $ git clone https://github.com/karen-mikaela/ldap-auth.git ldapAuth
 $ cd ldapAuth
 $ zip -r ldapAuth.zip plugins  
-´´´
+```
 Now to install a new plugin in your Revive Adserver installation, you need to be logged in as an Administrator to be able to install new plugins.
 Follow the next steps below.
 
@@ -33,36 +34,52 @@ LdapAuth supports that you configure with your ldap parameters by  Plugin Settin
 
 The parameters are
 * {ldapEnable} If you want not use ldap, leave unchecked.
+
 _Default: true_
 * {ldapRecursiveGroups} To verify if a user is a member of a group, this function must be enabled. 
+
 _Default: true_
 * {ldapRealPrimarygroup} AD does not always return the primary group.
+
 _Default: true_
 * {ldapSSO} To indicate to adLDAP to reuse password.
+
 _Default: false_
 * {ldapUseSSL} To Use SSL (LDAPS), your server needs to be setup If you wish to use SSL leave checked.
+
 _Default: false_
 * {ldapUseTLS} If you want to use TLS leave unchecked.
+
 _Default: false_
 * {ldapUserInGroup} A group name for determinate if the user is a member.
+
 _Default: "blank"_
 * {ldapAdPort} The default port for LDAP non-SSL connections.
+
 _Default: 389_
 * {ldapPrefix} Is a string that will join with your username.
+
 _Default: "blank"_
 * {ldapAccountSufix} The full account suffix for your domain.
+
 _Default: "blank"_
 * {ldapBaseDn} The base dn for your domain. This is generally the same as your account suffix, but broken up and prefixed with DC=.
+
 _Default: "blank"_
 * {ldapDomainController} Specify the domain name.
+
 _Default: "blank"_
 * {ldapAdminUsername} You may wish to specify an account with higher privileges to perform privileged operations.
+
 _Default: "blank"_
 * {ldapAdminPassword} The corresponding password for adminUsername.
+
 _Default: "blank"_
 * {ldapDefaultLanguage} New user will create with this language
+
 _Default: pt_BR_
 * {ldapDefaultAccountID} New user will create with this account id.
+
 _Default: 2_
 
 ## HOW CREATE MY AUTHENTICATION PLUGING
