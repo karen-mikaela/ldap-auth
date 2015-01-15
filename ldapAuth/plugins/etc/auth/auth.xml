@@ -120,5 +120,9 @@
         <postscript>postscript_install_auth.php</postscript>
 
     </install>
+    <uninstall>
+        <prescript>prescript_uninstall_auth.php</prescript>
+        <postscript>postscript_uninstall_auth.php</postscript>
+    </uninstall>
 
 </plugin>

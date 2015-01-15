@@ -25,29 +25,22 @@
 $Id$
 */
 
-$className = 'postscript_install_auth';
+$className = 'prescript_install_auth';
+
 
 /**
  * Installs any additional data after the plugins are installed
  * (before they are enabled)
  *
  */
-class postscript_install_auth
+class prescript_install_auth
 {
     /**
      *
      * @return boolean  True on success, else false
      */
-    function execute(){
-    	//$this->extension, $this->group, $this->component
-        $oSettings  = new OA_Admin_Settings();
-        $oSettings->settingChange("authentication","type","authentication:auth:authComponent");
-        if (!$oSettings->writeConfigChange())
-            {
-                $this->_logError('Failed to write configuration settings');
-                return false;
-            }
-
+    function execute()
+    {
         return true;
     }
 }

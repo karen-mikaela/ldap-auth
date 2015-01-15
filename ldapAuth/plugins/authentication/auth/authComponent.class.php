@@ -3,8 +3,6 @@ require_once LIB_PATH . '/Plugin/Component.php';
 require_once LIB_PATH . '/Extension/authentication/authentication.php';
 require_once "lib/adLDAP/src/adLDAP.php";
 
-    //$this->extension, $this->group, $this->component
-    //authentication:auth:authComponent
 class Plugins_Authentication_Auth_AuthComponent extends Plugins_Authentication{
 
     var $ldapEnable;
@@ -87,8 +85,6 @@ class Plugins_Authentication_Auth_AuthComponent extends Plugins_Authentication{
     * @return boolean true if connected
     */
     function authByLdap($username,$password){
-
-
         $param_adldap = array(
                 'account_suffix'     => $this->ldapAccountSufix,
                 'base_dn'            => $this->ldapBaseDn,
@@ -114,13 +110,13 @@ class Plugins_Authentication_Auth_AuthComponent extends Plugins_Authentication{
     }
 
     function createAndSaveUserDo($adLdapConnection,$username,$password){
-        $display_name = $adLdapConnection->user()->info($username);
+        $infoCollection = $adLdapConnection->user()->infoCollection($username,array("displayName","mail"));
         $user_id = $this->saveUserDo(
                 OA_Dal::factoryDO('users'),
                 $username,
                 $password,
-                $display_name[0]['displayname'][0],
-                $display_name[0]['mail'][0],
+                $infoCollection->displayName,
+                $infoCollection->mail,
                 $this->ldapDefaultLanguage,
                 $this->ldapDefaultAccountID
                 );
