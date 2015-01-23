@@ -29,7 +29,6 @@ $className = 'postscript_install_auth';
 
 /**
  * Installs any additional data after the plugins are installed
- * (before they are enabled)
  *
  */
 class postscript_install_auth
@@ -39,11 +38,15 @@ class postscript_install_auth
      * @return boolean  True on success, else false
      */
     function execute(){
-    	//$this->extension, $this->group, $this->component
+    	// if we have the type
     	if (isset($GLOBALS['_MAX']['CONF']['authentication']['type'])){
+    		//this value is name_extension:name_group:name_component
             $value = "authentication:auth:authComponent";     
+	        //with Admin_Settings we can write on conf file
 	        $oSettings  = new OA_Admin_Settings();
+	        //here the type is updated to use this plugin
 	        $oSettings->settingChange("authentication","type",$value);
+	        //finally is saved on conf file
 	        $oSettings->writeConfigChange();
 	        return true;
 	    }else{	    	

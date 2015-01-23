@@ -30,7 +30,6 @@ $className = 'postscript_uninstall_auth';
 
 /**
  * unInstalls any additional data after the plugins are uninstalled
- * (before they are enabled)
  *
  */
 class postscript_uninstall_auth
@@ -41,7 +40,9 @@ class postscript_uninstall_auth
      */
     function execute(){         
     	$oSettings  = new OA_Admin_Settings();
+        // set to original type -> Internal
         $oSettings->settingChange("authentication","type","internal");
+        // remove all settings of auth component
         $oSettings->bulkSettingChange("auth",array());
         $oSettings->writeConfigChange();
         return true;
