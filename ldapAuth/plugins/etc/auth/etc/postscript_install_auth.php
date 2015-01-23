@@ -40,14 +40,14 @@ class postscript_install_auth
      */
     function execute(){
     	//$this->extension, $this->group, $this->component
-        $oSettings  = new OA_Admin_Settings();
-        $oSettings->settingChange("authentication","type","authentication:auth:authComponent");
-        if (!$oSettings->writeConfigChange())
-            {
-                $this->_logError('Failed to write configuration settings');
-                return false;
-            }
-
-        return true;
+    	if (isset($GLOBALS['_MAX']['CONF']['authentication']['type'])){
+            $value = "authentication:auth:authComponent";     
+	        $oSettings  = new OA_Admin_Settings();
+	        $oSettings->settingChange("authentication","type",$value);
+	        $oSettings->writeConfigChange();
+	        return true;
+	    }else{	    	
+	    	return false;
+	    }
     }
 }

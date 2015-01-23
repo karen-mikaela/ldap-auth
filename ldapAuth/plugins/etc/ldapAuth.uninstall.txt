@@ -1,4 +1,1 @@
-Remember that you need change the type of authentication in conf file.
-Edit _ip_.conf.php
-[authentication]
-type="internal"
+Now your authentication is internal type.

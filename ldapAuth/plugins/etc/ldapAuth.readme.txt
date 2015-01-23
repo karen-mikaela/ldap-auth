@@ -1,10 +1,2 @@
 Do authentication using ldap plugin
-Please after install set type of authentication to "authentication:auth:authComponent"
-
-Before:
-[authentication]
-type="internal"
-
-After:
-[authentication]
-type="authentication:auth:authComponent"
+Please after install set up the settings parameters.

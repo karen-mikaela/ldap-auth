@@ -42,12 +42,8 @@ class postscript_uninstall_auth
     function execute(){         
     	$oSettings  = new OA_Admin_Settings();
         $oSettings->settingChange("authentication","type","internal");
-        if (!$oSettings->writeConfigChange())
-            {
-                $this->_logError('Failed to write configuration settings');
-                return false;
-            }
-
+        $oSettings->bulkSettingChange("auth",array());
+        $oSettings->writeConfigChange();
         return true;
     }
 }
